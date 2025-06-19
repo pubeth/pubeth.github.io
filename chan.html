@@ -1,60 +1,239 @@
 <!DOCTYPE html>
+<html lang="zh-CN">
 <head>
-    <meta charset="UTF-8"  name="viewport"
-     content="maximum-scale=1.0,minimum-scale=1.0,
-     user-scalable=0,width=device-width,
-     initial-scale=1.0"/>
-     <title>产品介绍</title>
-     <style>
-         body{
-             background-image: linear-gradient( to bottom right,#0ff,#8A2BE2);
-             background-repeat: no-repeat;
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>冰封终焉  题元素</title>
+<style>
+  body {
+    background: #0b1224;
+    color: #d0e6f9;
+    font-family: "宋体", "Times New Roman", sans-serif;
+    margin: 20px;
+  }
+  h1 {
+    text-align: center;
+    color: #a5d8ff;
+    margin-bottom: 30px;
+    text-shadow: 0 0 10px #4acaff;
+  }
+  .element-list {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  .element {
+    display: flex;
+    background: #16223f;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    padding: 15px;
+    box-shadow: 0 0 15px #2a3a70;
+  }
+.img-placeholder {
+  flex: 0 0 300px;
+  aspect-ratio: 3 / 2; /* 保持3:2比例框，可自动伸缩高度 */
+  background: #20305f;
+  border-radius: 8px;
+  margin-right: 20px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-            }
+.img-placeholder img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;      /* 保持比例填满裁剪 */
+  object-position: center; /* 居中对齐 */
+  border-radius: 8px;
+}
 
-     .track{
-         display: inline-block;
-     }
-     span{
-         text-decoration:none;
-         color:black;
-     }
-
-    </style>
-    <script type="text/javascript">
-    var i=0;
-    var images=["product/1_poster.5e6e07b9.png","product/微信图片_20210729131529.jpg"];
-    function swap(){
- document.getElementById("img").src=images[i];
-i++;
-if(i>1) {i=0;}
+  .element-content {
+    flex: 1;
+  }
+  .element-title {
+    font-size: 20px;
+    color: #7ec4ff;
+    margin-bottom: 8px;
+    text-shadow: 0 0 6px #7ec4ff;
+  }
+  .element-desc {
+    font-size: 14px;
+    line-height: 1.5em;
+    color: #c9e0ffdd;
+  }
+  @media (max-width: 600px) {
+    .element {
+      flex-direction: column;
+      align-items: center;
     }
-    setInterval("swap()",1000);
-
-    </script>
+    .img-placeholder {
+      margin-right: 0;
+      margin-bottom: 12px;
+      width: 80%;
+      height: auto;
+      aspect-ratio: 3 / 2;
+    }
+    .element-content {
+      text-align: center;
+    }
+  }
+</style>
 </head>
 <body>
 
-    <div id="header">
-        <img style="width:100%; background-size: contain; 
-        height: 250px;"src="product/微信图片_20210729131529.jpg" id="img" alt=""/>
-    </div>
-    <div class="track">
+<h1>冰封终焉     主题元素</h1>
 
-        <a href="https:\\www.bilibili.com">&nbsp;
-      <img style="width: 50px;
-      height: 50px;"src="product/微信图片_20210729131529.jpg" alt="">
-        <br>  
-         <span> 产品信息</span>
-        </a>
-        </div>
-        <div class="track">
-        <a href="https:\\www.bilibili.com">
-            <img style="width: 50px;
-            height: 50px;"src="product/1_poster.5e6e07b9.png" alt="">
-           <br>  
-            <span> 产品信息</span>
-        </a>
+<div class="element-list">
+
+  <div class="element">
+    <div class="img-placeholder">
+      <img src="topic\frost.jpg" alt="冰封要塞" />
     </div>
+    <div class="element-content">
+      <div class="element-title">冰封要塞（Frozen Bastion）</div>
+      <div class="element-desc">
+        北极狐皇的王座所在，座落于极北冰川之巅。坚固的冰晶石砌成，常年被暴风雪包围，防御力极强。
+        <br><br>功能：考虑作为机器的背景，增加氛围感。
+      </div>
+    </div>
+  </div>
+
+ <div class="element">
+    <div class="img-placeholder">
+      <img src="huli.jpg" alt="北极狐" />
+    </div>
+    <div class="element-content">
+      <div class="element-title">北极狐（Froststeel Pike）</div>
+      <div class="element-desc">
+        拟人化可为银白长发、披风如雪、狐耳、九尾等元素，手持“雪语权杖”或“冰灵笏”。
+        <br><br>功能：考虑作为产品的ip标志，可考虑拟人化增加产品的独特性和辨识度。
+      </div>
+    </div>
+  </div>
+
+  <div class="element">
+    <div class="img-placeholder">
+      <img src="sword.jpg" alt="审判之剑" />
+    </div>
+    <div class="element-content">
+      <div class="element-title">审判之剑（Judgement Blade）</div>
+      <div class="element-desc">
+        北极狐皇所持的神器，剑身由纯净寒冰铸造，能斩断魔法结界并冻结敌人的灵魂。剑柄镶嵌着蓝色极光水晶，光芒时隐时现。
+      </div>
+    </div>
+  </div>
+
+  <div class="element">
+    <div class="img-placeholder">
+      <img src="statue.JPG" alt="冰渊魔像" />
+    </div>
+    <div class="element-content">
+      <div class="element-title">冰渊魔像（Aurora Shield）</div>
+      <div class="element-desc">
+        冰原最深处的远古造物，由诸神之怨念和永冻之核构成。
+      </div>
+    </div>
+  </div>
+
+  <div class="element">
+    <div class="img-placeholder">
+      <img src="maoniu.jpg" alt="苔原驯兽" />
+    </div>
+    <div class="element-content">
+      <div class="element-title">苔原驯兽（Frosthorn Strider）</div>
+      <div class="element-desc">
+        冰封荒原中的驯化巨兽，通体雪白、脊背有鳞棘，能适应极端低温。用于近战冲锋或载人通勤。
+      </div>
+    </div>
+  </div>
+
+  <div class="element">
+    <div class="img-placeholder">
+      <img src="Armor.png" alt="冻土铠甲" />
+    </div>
+    <div class="element-content">
+      <div class="element-title">冻土铠甲（Permafrost Armor）</div>
+      <div class="element-desc">
+        用冰晶矿石、寒钢和厚实皮毛打造的重甲，穿戴者能抵御极端低温。
+      </div>
+    </div>
+  </div>
+
+  <div class="element">
+    <div class="img-placeholder">
+      <img src="Auroracore.png" alt="极光之心" />
+    </div>
+    <div class="element-content">
+      <div class="element-title">极光之心（Auroracore）</div>
+      <div class="element-desc">
+        冰封帝国汲取极光能量后压缩凝结的晶核，是帝国各大核心设施的能源来源
+      </div>
+    </div>
+  </div>
+
+  <div class="element">
+    <div class="img-placeholder">
+      <img src="badge.jpg" alt="帝国勋章" />
+    </div>
+    <div class="element-content">
+      <div class="element-title">帝国勋章（Badge of Empire）</div>
+      <div class="element-desc">
+        传说中的至高无上的荣耀。
+      </div>
+    </div>
+  </div>
+
+  <div class="element">
+    <div class="img-placeholder">
+      <img src="key.png" alt="冰脉之钥" />
+    </div>
+    <div class="element-content">
+      <div class="element-title">冰脉之钥（Key of Icevein）</div>
+      <div class="element-desc">
+        开启冰封要塞传送门的唯一钥匙，由北极狐皇亲自守护，刻有古老冰纹符号。
+      </div>
+    </div>
+  </div>
+
+  <div class="element">
+    <div class="img-placeholder">
+      <img src="snowman.png" alt="雪人" />
+    </div>
+    <div class="element-content">
+      <div class="element-title">雪人（Snowman）</div>
+      <div class="element-desc">
+        用寒冰和龙骨制成，敲击时能震慑敌军并提升己方士气，鼓声会在空气中凝结成冰霜。
+      </div>
+    </div>
+  </div>
+
+<div class="element">
+    <div class="img-placeholder">
+      <img src="Jackdaw.png" alt="寒鸦" />
+    </div>
+    <div class="element-content">
+      <div class="element-title">寒鸦（Jackdaw）</div>
+      <div class="element-desc">
+        少数能够生活于极地的乌鸦，能够通风报信
+      </div>
+    </div>
+  </div>
+  
+  <div class="element">
+    <div class="img-placeholder">
+      <img src="castle.png" alt="冰晶堡垒" />
+    </div>
+    <div class="element-content">
+      <div class="element-title">冰晶堡垒（Fort）</div>
+      <div class="element-desc">
+        由冰霜精心打造的城堡
+      </div>
+    </div>
+  </div>
+
+</div>
+
 </body>
 </html>
