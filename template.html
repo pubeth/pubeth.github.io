@@ -1,105 +1,151 @@
 <html>
 <head>
     <title>畅凯动漫游艺设备电子标识</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
-	<style>
-		body,.page-wrap {
-			width: 100%;
-            height: 100%;
-			margin: 0;
-			padding: 0;
-		}
-		.page-wrap .device-info .header{
-			width: 100%;
-			height: 45px;
-			font-size: 18px;
-			font-weight: 400;
-			background-color: rgb(49, 63, 86);
-			color: rgba(255, 255, 255, 1);
-			display: flex;
-			align-items: center;
-			justify-content: center;
-		}
-        .item-list {
-            padding: 10px 30px 0 20px;
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        .item-list  .list {
+        html, body {
+            width: 100%;
+            height: 100%;
+            background: #fff;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            overflow: hidden;
+        }
+        .page-wrap {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* 上半部分：machine.html 自适应剩余空间 */
+        .draw-page {
+            flex: 1 1 auto;
+            min-height: 0;
+            width: 100%;
+            background: #f5f5f5;
+        }
+        .draw-page iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: block;
+        }
+
+        /* 设备信息区域：固定在底部，不参与拉伸 */
+        .device-info {
+            flex: 0 0 auto;
+            width: 100%;
+            background: #fff;
+        }
+        .device-info .header {
+            width: 100%;
+            height: 45px;
+            font-size: 17px;
+            font-weight: 500;
+            background-color: rgb(49, 63, 86);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .item-list {
+            padding: 10px 20px 0 20px;
+        }
+        .item-list .list {
             display: flex;
             font-size: 14px;
-            font-weight: 400;
-            color: rgba(0, 0, 0, 1);
+            color: #000;
             line-height: 26px;
         }
-        .item-list  .list .label {
-             width: 70px;
-             flex-shrink: 0;
-             margin-right: 15px;
-         }
-        .tips {
-            padding: 0 20px;
-            font-size: 14px;
-            margin: 15px 0;
+        .item-list .list .label {
+            width: 75px;
+            flex-shrink: 0;
+            color: #888;
+            margin-right: 10px;
         }
-        .device-info .foot {
+        .item-list .list div:last-child {
+            flex: 1;
+            word-break: break-all;
+        }
+
+        /* PDF 区域：固定高度，不显示浏览器自带工具栏 */
+        .pdf-box {
+            width: 100%;
+            height: 45vh;          /* 手机上占屏幕高度约 45%，可自行调整 */
+            min-height: 220px;
+            margin-top: 10px;
+            background: #f5f5f5;
+            overflow: hidden;
+        }
+        .pdf-box iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: block;
+        }
+
+        .foot {
             background-color: rgb(239, 239, 244);
             text-align: center;
             font-size: 12px;
-            font-weight: 400;
-            color: rgba(0, 0, 0, 1);
+            color: #000;
             line-height: 20px;
-            padding: 12px 0 12px 0;
+            padding: 10px 0;
         }
-		.device-info .foot a {
-			color: #000;
-			text-decoration: none;
-        }
-        .page-wrap{
-            display: none;
+        .foot a {
+            color: #000;
+            text-decoration: none;
         }
     </style>
 </head>
 <body>
     <div class="page-wrap">
-	<div class="draw-page">
-		<iframe src="machine.html" frameBorder=0 marginwidth=0 marginheight=0 scrolling="auto" width="100%" height="76%" ></iframe>
-	</div>
-	<div class="device-info">
-		<div class="header">场地与设备信息</div>
-        <div class="item-list">
-            <div class="list">
-                <div class="label">所在场地:</div>																									
-                <div>xxxx电玩城</div>
-            </div>
-			<div class="list">
-                <div class="label">设备编号:</div>
-                <div>28111129</div>
-            </div>
-            <div class="list">
-                <div class="label">销售厂家:</div>
-                <div>畅凯动漫科技</div>
-            </div>
-            
+        <!-- 上方：机器信息页面 -->
+        <div class="draw-page">
+            <iframe src="machine.html" frameborder="0" scrolling="auto"></iframe>
         </div>
-	    <iframe src="wenshen.pdf" width="100%" height="500px" frameborder="0"></iframe>        <div class="foot">
-            <div class="foot-item">
 
-			</div>			
+        <!-- 下方：设备信息 + PDF -->
+        <div class="device-info">
+            <div class="header">场地与设备信息</div>
+            <div class="item-list">
+                <div class="list">
+                    <div class="label">所在场地:</div>
+                    <div>xxxx电玩城</div>
+                </div>
+                <div class="list">
+                    <div class="label">设备编号:</div>
+                    <div>28111129</div>
+                </div>
+                <div class="list">
+                    <div class="label">销售厂家:</div>
+                    <div>畅凯动漫科技</div>
+                </div>
+            </div>
+
+            <!-- PDF 展示区，加 #toolbar=0 尽量隐藏工具栏 -->
+            <div class="pdf-box">
+                <iframe src="wenshen.pdf#toolbar=0&navpanes=0&scrollbar=0" frameborder="0"></iframe>
+            </div>
+
+            <div class="foot">
+                <div class="foot-item"></div>
+            </div>
         </div>
-    
-	</div>
-</div>
+    </div>
 
-
-
-
+    <script>
+        window.pageConfig = {
+            active: '1',
+            officialQrContentUrl: ""
+        }
+        // 显示页面
+        document.querySelector('.page-wrap').style.display = 'flex';
+    </script>
 </body>
-
-<script>
-    window.pageConfig = {
-        active : '1',
-        officialQrContentUrl : ""
-    }
-    // 修复：删除了错误的 document.quer 语句
-    pageConfig.active == 0 ? location.href = pageConfig.officialQrContentUrl :  document.querySelector('.page-wrap').style.display = 'block';
-</script>
 </html>
