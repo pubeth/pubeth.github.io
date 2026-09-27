@@ -32,7 +32,10 @@
     }
 
     body {
-        font-size: 14px;
+        /* 根据屏幕实际宽度(vw)在 12px~16px 之间平滑缩放，
+           比固定 14px 更贴合不同尺寸手机，
+           且不依赖 devicePixelRatio，不会在高分屏上被放大出错。 */
+        font-size: clamp(12px, 3.6vw, 16px);
     }
 
     html * {
