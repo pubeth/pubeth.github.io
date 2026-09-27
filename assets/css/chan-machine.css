@@ -1,0 +1,164 @@
+@charset "utf-8";
+
+html {
+  color: #333;
+  background: #fff;
+  overflow-y: scroll;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+}
+
+html * {
+  outline: 0;
+  -webkit-text-size-adjust: none;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+html,
+body {
+  font-family: sans-serif;
+}
+
+body,
+div,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+pre,
+code,
+form,
+fieldset,
+legend,
+input,
+textarea,
+p,
+blockquote,
+th,
+td,
+hr,
+button,
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.container {
+  background: #fff;
+}
+
+.top {
+  border-width: 0;
+  overflow: hidden;
+  width: 100%;
+  background: linear-gradient(116.46deg, #ffffff 0%, #ffffff 100%);
+}
+
+.top-first {
+  text-align: center;
+  border-bottom: 1px solid #e4e7ed;
+  margin: 1em;
+  margin-top: 20px;
+}
+
+.top-first .p-first {
+  font-size: 160%;
+  margin-bottom: 0.5em;
+}
+
+.first {
+  line-height: 400%;
+  background-color: rgba(249, 249, 247, 1);
+  box-sizing: border-box;
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgba(215, 215, 215, 1);
+  border-left: 0;
+  border-top: 0;
+  border-right: 0;
+  border-radius: 0;
+}
+
+.first .xd {
+  margin: 1em;
+  font-weight: bold;
+  font-size: 150%;
+  color: #02a7f0;
+  text-align: right;
+  margin-right: 10px;
+  text-shadow: 2px 0 0 #02a7f0;
+}
+
+.first span:nth-child(2) {
+  font-size: 120%;
+}
+
+.ycxx {
+  margin: 0.2rem 0.5rem;
+  font-size: 110%;
+}
+
+.ycxx-content {
+  display: flex;
+  flex-direction: row;
+  line-height: 0.6rem;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding-bottom: 0.2rem;
+  margin-bottom: 0.15rem;
+  border-bottom: 1px solid grey;
+}
+
+.ycxx-content .ycxx-left {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 45%;
+  min-width: 120px;
+  margin-bottom: 0.25rem;
+}
+
+.ycxx-left span:nth-child(1) {
+  color: #aaaaaa;
+}
+
+.ycxx-content a {
+  color: #02a7f0;
+  cursor: pointer;
+}
+
+html,
+body,
+img {
+  padding: 0;
+  margin: 0;
+  vertical-align: bottom;
+  display: block;
+}

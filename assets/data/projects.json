@@ -1,0 +1,12 @@
+[
+  {
+    "name": "pubeth.github.io",
+    "description": "个人站点与 3D 可视化实验，GitHub Pages 托管。",
+    "url": "https://github.com/pubeth/pubeth.github.io"
+  },
+  {
+    "name": "3D STL Demo",
+    "description": "全屏 Three.js 吉他模型与环境贴图展示（独立演示页）。",
+    "url": "demo.html"
+  }
+]

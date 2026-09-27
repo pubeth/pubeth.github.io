@@ -1,142 +1,192 @@
-<!-- adapted from https://threejs.org/examples/webgl_loader_stl and https://sbcode.net/threejs/loaders-stl/ -->
-
-<!--
-a. copy and save all of this, into your own .html, eg. fun.html
-b. create an img/ folder, place 6 cubemap photos (eg of your room!)
-c. edit fun.html, remove 'https://bytes.usc.edu/~saty/tools/xem/x/THREE-STLLoader/' 6 times [so you only have img/...]
-d. create models/your-model.stl
-e. edit fun.html, remove https://bytes.usc.edu/~saty/... in the loader.load() call, instead put in models/your-model.stl
-f. load fun.html into your browser - ta-da!!
--->
-
-
 <!DOCTYPE html>
-<html lang="en">
-   <head>
-      <title>STL loader</title>
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-      <script src="https://unpkg.com/three@0.146.0/build/three.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-      <script src="https://unpkg.com/three@0.146.0/examples/js/loaders/STLLoader.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-      <script src="https://unpkg.com/three@0.146.0/examples/js/controls/OrbitControls.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-   </head>
-   <body>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Pubeth — 开发者 · 3D 可视化</title>
+    <meta
+      name="description"
+      content="Pubeth 的个人主页：Web 开发、3D 与交互实验。欢迎通过 GitHub 联系。"
+    />
+    <meta name="theme-color" content="#0f1419" />
+    <meta property="og:title" content="Pubeth — 个人主页" />
+    <meta
+      property="og:description"
+      content="Web 开发 · 3D 可视化 · GitHub Pages 个人站点"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://pubeth.github.io/" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">跳到主要内容</a>
 
-	<script id="vertexShader" type="x-shader/x-vertex">
-	void main() {
-		gl_Position = projectionMatrix * modelViewMatrix * vec4(position.x, position.y, position.z, 1.0);
-	}
-	
-</script>
-<script id="fragmentShader" type="x-shader/x-fragment">
-	void main() {
-		gl_FragColor = vec4(0.0, 0.58, 0.86, 1.0);
-	}
-</script>	
+    <div id="scene-fallback" class="scene-fallback" aria-hidden="true"></div>
+    <div id="scene-root" aria-hidden="true"></div>
+    <div class="scene-overlay" aria-hidden="true"></div>
 
-      <script>
-         const scene = new THREE.Scene(); 
-         scene.add(new THREE.AxesHelper(2)); // cmt this out if you like...
-         
-         const light = new THREE.SpotLight();
-         light.position.set(20, 20, 20);
-         scene.add(light);
-         
-         const camera = new THREE.PerspectiveCamera(
-             75,
-             window.innerWidth / window.innerHeight,
-             0.1,
-             10000
-         );
-         camera.position.z = 3;
-         
-         const renderer = new THREE.WebGLRenderer();
-         renderer.outputEncoding = THREE.sRGBEncoding;
-         renderer.setSize(window.innerWidth, window.innerHeight);
-         document.body.appendChild(renderer.domElement);
-         
-         const controls = new THREE.OrbitControls(camera, renderer.domElement);
-         controls.enableDamping = true;
-         
-         var shaderMaterial = new THREE.ShaderMaterial({
-  vertexShader: document.getElementById("vertexShader").textContent,
-  fragmentShader: document.getElementById("fragmentShader").textContent,
-});
-         
-         const envTexture = new THREE.CubeTextureLoader().load([
-             'https://pubeth.github.io/model/px.png',
-             'https://pubeth.github.io/model/nx.png',
-             'https://pubeth.github.io/model/py.png',
-             'https://pubeth.github.io/model/ny.png',
-             'https://pubeth.github.io/model/pz.png',
-             'https://pubeth.github.io/model/nz.png'
-         ]);
-         envTexture.mapping = THREE.CubeReflectionMapping;
-         scene.background = envTexture;
+    <div class="site-shell">
+      <header class="site-header">
+        <div class="container header-inner">
+          <a class="logo" href="#">Pub<span>eth</span></a>
 
-         let material;
-         
-         material = new THREE.MeshPhysicalMaterial({
-             color: 0xb2ffc8,
-             envMap: envTexture,
-             metalness: 0.25,
-             roughness: 0.4,
-             opacity: 1.0,
-             transparent: true,
-             transmission: 0.99,
-             clearcoat: 1.0,
-             clearcoatRoughness: 0.25
-         });
-     
-         const loader = new THREE.STLLoader();
-         loader.load(
-             'https://pubeth.github.io/model/guitar.stl',
-             function (geometry) {
-                 const mesh = new THREE.Mesh(geometry, material)
-                 mesh.scale.set(0.1, 0.1, 0.1);
-                 scene.add(mesh)
-             },
-             (xhr) => {
-                 console.log((xhr.loaded / xhr.total) * 100 + '% loaded')
-             },
-             (error) => {
-                 console.log(error)
-             }
-         );
-         // for fun, above, change colored.stl to CharlotteValve.stl, 
-         // and also change 
-         // *4 below, twice, to *120, and do globe.stl, with *10 :)
-         
-         window.addEventListener('resize', onWindowResize, false);
-         function onWindowResize() {
-             camera.aspect = window.innerWidth / window.innerHeight
-             camera.updateProjectionMatrix()
-             renderer.setSize(window.innerWidth, window.innerHeight)
-             render()
-         };
-         
-         //const stats = Stats()
-         //document.body.appendChild(stats.dom)
-         
-         function animate() {
-             requestAnimationFrame(animate);
-             controls.update();
-             render();
-             //stats.update()
-         }
-         
-         function render() {
-         
-         
-             const timer = Date.now()*0.0005;
-             camera.position.x = Math.cos(timer)*4;
-             camera.position.z = Math.sin(timer)*4;
-         
-             renderer.render(scene, camera);
-         }
-         
-         animate();
-         	
-      </script>
-   </body>
+          <nav aria-label="主导航">
+            <ul class="nav-desktop">
+              <li><a href="#about">关于</a></li>
+              <li><a href="#skills">技能</a></li>
+              <li><a href="#projects">项目</a></li>
+              <li><a href="#contact">联系</a></li>
+            </ul>
+          </nav>
+
+          <div class="header-actions">
+            <a
+              class="icon-link"
+              href="https://github.com/pubeth"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="GitHub 主页"
+            >
+              <svg viewBox="0 0 16 16" aria-hidden="true">
+                <path
+                  d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"
+                />
+              </svg>
+            </a>
+            <button
+              type="button"
+              class="nav-toggle"
+              aria-expanded="false"
+              aria-controls="nav-mobile"
+              aria-label="打开菜单"
+            >
+              <span></span>
+              <span></span>
+              <span></span>
+            </button>
+          </div>
+        </div>
+
+        <nav id="nav-mobile" class="nav-mobile" aria-label="移动端导航">
+          <ul>
+            <li><a href="#about">关于</a></li>
+            <li><a href="#skills">技能</a></li>
+            <li><a href="#projects">项目</a></li>
+            <li><a href="#contact">联系</a></li>
+          </ul>
+        </nav>
+      </header>
+
+      <main id="main">
+        <section class="hero container" aria-labelledby="hero-title">
+          <div class="card">
+            <p class="hero-eyebrow">Personal Site</p>
+            <h1 id="hero-title">你好，我是 Pubeth</h1>
+            <p class="hero-tagline">
+              Web 开发与 3D 可视化爱好者 — 背景里旋转的是我用 Three.js 加载的 STL
+              模型，前台则是关于我的一切。
+            </p>
+            <div class="hero-cta">
+              <a class="btn btn-primary" href="#projects">查看项目</a>
+              <a class="btn btn-ghost" href="demo.html">全屏 3D 演示</a>
+              <a
+                class="btn btn-ghost"
+                href="https://github.com/pubeth"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                GitHub
+              </a>
+            </div>
+          </div>
+        </section>
+
+        <section id="about" class="container" aria-labelledby="about-title">
+          <h2 id="about-title" class="section-title">关于</h2>
+          <div class="card">
+            <p class="about-text">
+              这里是我的个人站点，托管在 GitHub Pages。我喜欢把静态网页、交互和
+              3D 场景结合起来，做出有一点「可玩性」的线上名片。
+            </p>
+            <p class="about-text">
+              你可以在下方看到技能标签与代表项目；文案与项目数据都可以在仓库里直接改（见
+              <code>index.html</code> 与
+              <code>assets/data/projects.json</code>）。
+            </p>
+          </div>
+        </section>
+
+        <section id="skills" class="container" aria-labelledby="skills-title">
+          <h2 id="skills-title" class="section-title">技能</h2>
+          <div class="card">
+            <ul class="skill-list">
+              <li>HTML / CSS</li>
+              <li>JavaScript</li>
+              <li>Three.js</li>
+              <li>WebGL</li>
+              <li>Git / GitHub</li>
+              <li>静态站点</li>
+              <li>UI 布局</li>
+              <li>3D 模型展示</li>
+            </ul>
+          </div>
+        </section>
+
+        <section id="projects" class="container" aria-labelledby="projects-title">
+          <h2 id="projects-title" class="section-title">项目</h2>
+          <div id="projects-grid" class="project-grid">
+            <p class="about-text">加载中…</p>
+          </div>
+        </section>
+
+        <section id="contact" class="container" aria-labelledby="contact-title">
+          <h2 id="contact-title" class="section-title">联系</h2>
+          <div class="card">
+            <p class="about-text">欢迎通过 GitHub 私信或 Issue 交流：</p>
+            <p class="contact-links">
+              <a
+                href="https://github.com/pubeth"
+                target="_blank"
+                rel="noopener noreferrer"
+                >github.com/pubeth</a
+              >
+            </p>
+          </div>
+        </section>
+      </main>
+
+      <footer class="site-footer">
+        <div class="container">
+          <p>
+            © <span id="year"></span> Pubeth ·
+            <a href="https://pubeth.github.io/">pubeth.github.io</a>
+          </p>
+        </div>
+      </footer>
+    </div>
+
+    <script>
+      document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+    <script
+      src="https://unpkg.com/three@0.146.0/build/three.min.js"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+      defer
+    ></script>
+    <script
+      src="https://unpkg.com/three@0.146.0/examples/js/loaders/STLLoader.js"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+      defer
+    ></script>
+    <script
+      src="https://unpkg.com/three@0.146.0/examples/js/controls/OrbitControls.js"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+      defer
+    ></script>
+    <script src="assets/js/site.js" defer></script>
+    <script src="assets/js/scene.js" defer></script>
+  </body>
 </html>

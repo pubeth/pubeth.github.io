@@ -1,0 +1,39 @@
+{
+  "pageTitle": "畅凯动漫游艺设备电子标识",
+  "pageConfig": {
+    "active": "1",
+    "officialQrContentUrl": ""
+  },
+  "iframe": {
+    "src": "chan-machine.html",
+    "height": "76%"
+  },
+  "venue": {
+    "siteName": "石河子市红万发游艺厅（个人独资）",
+    "deviceId": "28111129",
+    "vendor": "振艺科技"
+  },
+  "qrImage": "file/1751425610.png",
+  "ministry": {
+    "header": "中华人民共和国文化和旅游部",
+    "sectionTitle": "游戏游艺设备信息",
+    "fields": [
+      { "label": "设备名称", "value": "经典凤凰（立式4/6人）" },
+      { "label": "型号", "value": "JDFH-1" },
+      { "label": "机型机种", "value": "游艺娱乐设备" },
+      { "label": "设备来源", "value": "中国" },
+      { "label": "批准单位", "value": "宁夏回族自治区文化和旅游厅" },
+      { "label": "批准文号", "value": "宁游艺审〔2025〕224号" },
+      { "label": "批准时间", "value": "20250624" },
+      { "label": "企业名称", "value": "宁夏鑫晟旺科技开发有限公司" },
+      { "label": "统一社会信用代码", "value": "91640100MAEJDJLD2M" },
+      { "label": "住所", "value": "宁夏回族自治区银川市兴庆区银横路400号兴庆华府14号楼商业101室" }
+    ]
+  },
+  "footer": {
+    "links": [
+      { "href": "http://www.miit.gov.cn/", "text": "中华人民共和国工业和信息化部" },
+      { "href": "https://beian.miit.gov.cn/", "text": "粤ICP备2022150354号-1" }
+    ]
+  }
+}

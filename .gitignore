@@ -1,0 +1,5 @@
+three.js-master/
+.vscode/
+*.log
+.DS_Store
+Thumbs.db
