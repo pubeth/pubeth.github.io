@@ -349,32 +349,41 @@
         padding-bottom: 0.2rem;
     }
 
+    /* ==== 只改了下面 .ycxx 这一块：一列 + 全显示 ==== */
     .ycxx {
         margin: 0.2rem 0.5rem;
         font-size: 110%;
     }
 
     .ycxx-content {
-        flex-direction: row;
-        line-height: 0.6rem;
-        align-items: center;
-        justify-content: space-between;
-    }
-
-    .ycxx-content .ycxx-left,
-    .ycxx-right {
         display: flex;
         flex-direction: column;
+        line-height: 1.6;
+        align-items: flex-start;
+        margin-bottom: 0.4rem;
+    }
+
+    .ycxx-content .ycxx-left {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
     }
 
     .ycxx-left span:nth-child(1) {
         color: #AAAAAA;
     }
 
+    .ycxx-left span:nth-child(2) {
+        color: #000;
+        word-break: break-all;
+        overflow-wrap: break-word;
+        white-space: normal;
+    }
+    /* ==== 改动到此结束，下面照抄原版 ==== */
+
     .ycxx-right span:nth-child(1) {
         color: #AAAAAA;
     }
-
 
     .yccs-left {
         width: 80%;
@@ -428,6 +437,8 @@
                 <span>设备名称</span>
                 <span>海盗船长</span>
             </div>
+        </div>
+        <div class="ycxx-content">
             <div class="ycxx-left">
                 <span>型号</span>
                 <span>HZS-HDCZ-1</span>
@@ -438,6 +449,8 @@
                 <span>机型机种</span>
                 <span>游艺娱乐设备</span>
             </div>
+        </div>
+        <div class="ycxx-content">
             <div class="ycxx-left">
                 <span>设备来源</span>
                 <span>中国 </span>
@@ -448,6 +461,8 @@
                 <span>批准单位</span>
                 <span>江西省文化和旅游厅</span>
             </div>
+        </div>
+        <div class="ycxx-content">
             <div class="ycxx-left">
                 <span>批准文号</span>
                 <span>赣游艺审〔2025〕62号</span>
@@ -458,6 +473,8 @@
                 <span>批准时间</span>
                 <span>20250327</span>
             </div>
+        </div>
+        <div class="ycxx-content">
             <div class="ycxx-left">
                 <span>企业名称</span>
                 <span>江西华之世科技有限公司</span>
@@ -468,6 +485,8 @@
                 <span>统一社会信用代码</span>
                 <span>91360106MACUD1EGX5</span>
             </div>
+        </div>
+        <div class="ycxx-content">
             <div class="ycxx-left">
                 <span>住所</span>
                 <span>江西省南昌市高新区高新七路999号万科四季花城紫罗兰苑1栋(9#)壹层D14室(第1层)</span>
@@ -478,7 +497,6 @@
                 <span> </span>
                 <span><a onclick="tohref()">详情</a></span>
             </div>
-
         </div>
     </div>
 </div>
