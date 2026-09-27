@@ -3,119 +3,20 @@
 
 <head>
     <meta charset="UTF-8">
-    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script>
-        (function (win, lib) {
-            var doc = win.document;
-            var docEl = doc.documentElement;
-            var metaEl = doc.querySelector('meta[name="viewport"]');
-            var flexibleEl = doc.querySelector('meta[name="flexible"]');
-            var dpr = 0;
-            var scale = 0;
-            var tid;
-            var flexible = lib.flexible || (lib.flexible = {});
-
-            if (metaEl) {
-                console.warn('将根据已有的meta标签来设置缩放比例');
-                var match = metaEl.getAttribute('content').match(/initial\-scale=([\d\.]+)/);
-                if (match) {
-                    scale = parseFloat(match[1]);
-                    dpr = parseInt(1 / scale);
-                }
-            } else if (flexibleEl) {
-                var content = flexibleEl.getAttribute('content');
-                if (content) {
-                    var initialDpr = content.match(/initial\-dpr=([\d\.]+)/);
-                    var maximumDpr = content.match(/maximum\-dpr=([\d\.]+)/);
-                    if (initialDpr) {
-                        dpr = parseFloat(initialDpr[1]);
-                        scale = parseFloat((1 / dpr).toFixed(2));
-                    }
-                    if (maximumDpr) {
-                        dpr = parseFloat(maximumDpr[1]);
-                        scale = parseFloat((1 / dpr).toFixed(2));
-                    }
-                }
-            }
-            if (!dpr && !scale) {
-                var isAndroid = win.navigator.appVersion.match(/android/gi);
-                var isIPhone = win.navigator.appVersion.match(/iphone/gi);
-                var devicePixelRatio = win.devicePixelRatio;
-                if (isIPhone) {
-                    // iOS下，对于2和3的屏，用2倍的方案，其余的用1倍方案
-                    if (devicePixelRatio >= 3 && (!dpr || dpr >= 3)) {
-                        dpr = 3;
-                    } else if (devicePixelRatio >= 2 && (!dpr || dpr >= 2)) {
-                        dpr = 2;
-                    } else {
-                        dpr = 1;
-                    }
-                } else {
-                    // 其他设备下，仍旧使用1倍的方案
-                    dpr = 1;
-                }
-                scale = 1 / dpr;
-            }
-            docEl.setAttribute('data-dpr', dpr);
-            if (!metaEl) {
-                metaEl = doc.createElement('meta');
-                metaEl.setAttribute('name', 'viewport');
-                metaEl.setAttribute('content', 'initial-scale=' + scale + ', maximum-scale=' + scale + ', minimum-scale=' + scale + ', user-scalable=no');
-                if (docEl.firstElementChild) {
-                    docEl.firstElementChild.appendChild(metaEl);
-                } else {
-                    var wrap = doc.createElement('div');
-                    wrap.appendChild(metaEl);
-                    doc.write(wrap.innerHTML);
-                }
-            }
-            function refreshRem() {
-                var width = docEl.getBoundingClientRect().width;
-                if (width / dpr > 540) {
-                    width = 540 * dpr;
-                }
-                var rem = width / 10;
-                docEl.style.fontSize = rem + 'px';
-                flexible.rem = win.rem = rem;
-            }
-            win.addEventListener('resize', function () {
-                clearTimeout(tid);
-                tid = setTimeout(refreshRem, 300);
-            }, false);
-            win.addEventListener('pageshow', function (e) {
-                if (e.persisted) {
-                    clearTimeout(tid);
-                    tid = setTimeout(refreshRem, 300);
-                }
-            }, false);
-            if (doc.readyState === 'complete') {
-                doc.body.style.fontSize = 12 * dpr + 'px';
-            } else {
-                doc.addEventListener('DOMContentLoaded', function (e) {
-                    doc.body.style.fontSize = 12 * dpr + 'px';
-                }, false);
-            }
-
-            refreshRem();
-            flexible.dpr = win.dpr = dpr;
-            flexible.refreshRem = refreshRem;
-            flexible.rem2px = function (d) {
-                var val = parseFloat(d) * this.rem;
-                if (typeof d === 'string' && d.match(/rem$/)) {
-                    val += 'px';
-                }
-                return val;
-            }
-            flexible.px2rem = function (d) {
-                var val = parseFloat(d) / this.rem;
-                if (typeof d === 'string' && d.match(/px$/)) {
-                    val += 'rem';
-                }
-                return val;
-            }
-        })(window, window['lib'] || (window['lib'] = {}));
-    </script>
+    <!--
+        原先这里有一段基于 devicePixelRatio 的 rem/dpr 自适应脚本(flexible.js)。
+        它会把 body 的 font-size 设成 12 * dpr（iPhone 上 dpr 常为 2 或 3，
+        body 字号就变成 24px~36px），而页面里几乎所有文字用的都是百分比
+        font-size(160%/150%/120%/110%)，全部在这个偏大的基准上再放大，
+        导致在真机上文字巨大、换行错乱。
+        另外这个脚本还会往 <head> 里插入自己的 viewport meta，但本页始终是
+        被 template.html 用 <iframe> 嵌入展示的——移动端浏览器不会读取
+        iframe 内部文档自己的 viewport meta，所以这段脚本唯一真正生效的
+        部分就是那个把字号搞乱的 body.style.fontSize，有害无益，故整体移除，
+        改为固定、可预测的字号基准。
+    -->
     <title>&lrm;</title>
 </head>
 <style>
@@ -126,7 +27,12 @@
         background: #fff;
         overflow-y: scroll;
         -webkit-text-size-adjust: 100%;
-        -ms-text-size-adjust: 100%
+        -ms-text-size-adjust: 100%;
+        font-size: 16px;
+    }
+
+    body {
+        font-size: 14px;
     }
 
     html * {
@@ -502,6 +408,20 @@
 </div>
 </body>
 <script>
+    // 把本页真实内容高度告诉父页面(template.html)，让父页面把 iframe
+    // 调整到刚好放下内容的高度，避免在手机上被固定的 76% 高度裁切、
+    // 出现内部再滚动一层导致的"格式紊乱"观感。
+    function postHeightToParent(){
+        var h = document.body.scrollHeight;
+        if (window.parent && window.parent !== window) {
+            window.parent.postMessage({ type: 'machineHeight', height: h }, '*');
+        }
+    }
+    window.addEventListener('load', postHeightToParent);
+    window.addEventListener('resize', postHeightToParent);
+    // 图片等异步内容加载完成后高度可能变化，稍晚再上报一次兜底
+    setTimeout(postHeightToParent, 500);
+
     function tohref(){
         var url='http://www.guangzhouzhenyi.cn/mct/jingdianfenghuang46/';
         if(url==null||url==""||url=="null"||url=="undefined"){

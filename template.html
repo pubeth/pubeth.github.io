@@ -61,7 +61,7 @@
 <body>
     <div class="page-wrap">
 	<div class="draw-page">
-		<iframe src="machine.html" frameBorder=0 marginwidth=0 marginheight=0 scrolling="auto" width="100%" height="76%" ></iframe>
+		<iframe id="machineFrame" src="machine.html" frameBorder=0 marginwidth=0 marginheight=0 scrolling="no" width="100%" height="400" style="border:0; display:block;"></iframe>
 	</div>
 	<div class="device-info">
 		<div class="header">场地与设备信息</div>
@@ -101,5 +101,16 @@
     }
     // 修复：删除了错误的 document.quer 语句
     pageConfig.active == 0 ? location.href = pageConfig.officialQrContentUrl :  document.querySelector('.page-wrap').style.display = 'block';
+
+    // 接收 machine.html 上报的真实内容高度，让 iframe 撑到刚好能容纳内容，
+    // 而不是用固定的 76% 高度去裁切/内部滚动。
+    window.addEventListener('message', function (e) {
+        if (e.data && e.data.type === 'machineHeight') {
+            var frame = document.getElementById('machineFrame');
+            if (frame && e.data.height) {
+                frame.style.height = e.data.height + 'px';
+            }
+        }
+    });
 </script>
 </html>
