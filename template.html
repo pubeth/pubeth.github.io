@@ -24,8 +24,8 @@
 
         /* 上半部分：machine.html 自适应剩余空间 */
         .draw-page {
-            flex: 1 1 auto;
-            min-height: 0;
+            overflow: hidden;
+            height: 55vh;
             width: 100%;
             background: #f5f5f5;
         }
@@ -34,6 +34,7 @@
             height: 100%;
             border: none;
             display: block;
+            max-width: 100%;
         }
 
         /* 设备信息区域：固定在底部，不参与拉伸 */
@@ -111,34 +112,32 @@
         </div>
 
         <!-- 下方：设备信息 + PDF -->
-        <div class="device-info">
-            <div class="header">场地与设备信息</div>
-            <div class="item-list">
-                <div class="list">
-                    <div class="label">所在场地:</div>
-                    <div>xxxx电玩城</div>
-                </div>
-                <div class="list">
-                    <div class="label">设备编号:</div>
-                    <div>28111129</div>
-                </div>
-                <div class="list">
-                    <div class="label">销售厂家:</div>
-                    <div>畅凯动漫科技</div>
-                </div>
-            </div>
-
-            <!-- PDF 展示区，加 #toolbar=0 尽量隐藏工具栏 -->
-            <div class="pdf-box">
-                <iframe src="wenshen.pdf#toolbar=0&navpanes=0&scrollbar=0" frameborder="0"></iframe>
-            </div>
-
-            <div class="foot">
-                <div class="foot-item"></div>
-            </div>
+<div class="device-info">
+    <div class="header">场地与设备信息</div>
+    <div class="item-list">
+        <div class="list">
+            <div class="label">所在场地:</div>
+            <div>xxxx电玩城</div>
+        </div>
+        <div class="list">
+            <div class="label">设备编号:</div>
+            <div>28111129</div>
+        </div>
+        <div class="list">
+            <div class="label">销售厂家:</div>
+            <div>畅凯动漫科技</div>
         </div>
     </div>
 
+    <!-- PDF 展示区 -->
+    <div class="pdf-box">
+        <iframe src="wenshen.pdf#toolbar=0&navpanes=0&scrollbar=0" frameborder="0"></iframe>
+    </div>
+
+    <div class="foot">
+        <div class="foot-item"></div>
+    </div>
+</div>
     <script>
         window.pageConfig = {
             active: '1',
