@@ -80,7 +80,7 @@
             </div>
             
         </div>
-	    <img src='wenshen.jpg' width='100%'>        <div class="foot">
+	    <img src='biaoshi.jpg' width='100%'>       <img src='authorization.jpg' width='100%'> <div class="foot">
             <div class="foot-item">
 
 			</div>			
@@ -99,11 +99,10 @@
         active : '1',
         officialQrContentUrl : ""
     }
-    // 修复：删除了错误的 document.quer 语句
+
     pageConfig.active == 0 ? location.href = pageConfig.officialQrContentUrl :  document.querySelector('.page-wrap').style.display = 'block';
 
-    // 接收 machine.html 上报的真实内容高度，让 iframe 撑到刚好能容纳内容，
-    // 而不是用固定的 76% 高度去裁切/内部滚动。
+
     window.addEventListener('message', function (e) {
         if (e.data && e.data.type === 'machineHeight') {
             var frame = document.getElementById('machineFrame');

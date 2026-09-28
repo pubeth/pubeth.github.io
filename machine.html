@@ -350,13 +350,13 @@
         <div class="ycxx-content">
             <div class="ycxx-left">
                 <span>型号</span>
-                <span>HZS-HDCZ-1</span>
+                <span>SY-HDCZ-112-1</span>
             </div>
         </div>
         <div class="ycxx-content">
             <div class="ycxx-left">
                 <span>机型机种</span>
-                <span>游艺娱乐设备</span>
+                <span>电子游戏设备（机）</span>
             </div>
         </div>
         <div class="ycxx-content">
@@ -368,37 +368,37 @@
         <div class="ycxx-content">
             <div class="ycxx-left">
                 <span>批准单位</span>
-                <span>江西省文化和旅游厅</span>
+                <span>山东省文化和旅游厅</span>
             </div>
         </div>
         <div class="ycxx-content">
             <div class="ycxx-left">
                 <span>批准文号</span>
-                <span>赣游艺审〔2025〕62号</span>
+                <span>鲁游戏审〔2023〕1号</span>
             </div>
         </div>
         <div class="ycxx-content">
             <div class="ycxx-left">
                 <span>批准时间</span>
-                <span>20250327</span>
+                <span>20230130</span>
             </div>
         </div>
         <div class="ycxx-content">
             <div class="ycxx-left">
                 <span>企业名称</span>
-                <span>江西华之世科技有限公司</span>
+                <span>山东舜盈致胜科贸有限公司</span>
             </div>
         </div>
         <div class="ycxx-content">
             <div class="ycxx-left">
                 <span>统一社会信用代码</span>
-                <span>91360106MACUD1EGX5</span>
+                <span>9137010377844952X7</span>
             </div>
         </div>
         <div class="ycxx-content">
             <div class="ycxx-left">
                 <span>住所</span>
-                <span>江西省南昌市高新区高新七路999号万科四季花城紫罗兰苑1栋(9#)壹层D14室(第1层)</span>
+                <span>山东省济南市市中区民生大街22号三箭银苑B（东）楼1-1501室</span>
             </div>
         </div>
         <div class="ycxx-content">
@@ -411,10 +411,7 @@
 </div>
 </body>
 <script>
-    // 把本页真实内容高度告诉父页面(template.html)，让父页面把 iframe
-    // 调整到刚好放下内容的高度，避免在手机上被固定的 76% 高度裁切、
-    // 出现内部再滚动一层导致的"格式紊乱"观感。
-    function postHeightToParent(){
+      function postHeightToParent(){
         var h = document.body.scrollHeight;
         if (window.parent && window.parent !== window) {
             window.parent.postMessage({ type: 'machineHeight', height: h }, '*');
@@ -422,11 +419,11 @@
     }
     window.addEventListener('load', postHeightToParent);
     window.addEventListener('resize', postHeightToParent);
-    // 图片等异步内容加载完成后高度可能变化，稍晚再上报一次兜底
+
     setTimeout(postHeightToParent, 500);
 
     function tohref(){
-        var url='http://www.guangzhouzhenyi.cn/mct/jingdianfenghuang46/';
+        var url='http://gs.sdyygl.com:10088/eiod/mbDevice.html?id=10000070&areaCode=370000&showQrcode=true';
         if(url==null||url==""||url=="null"||url=="undefined"){
             alert("暂无详情");
         }
